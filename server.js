@@ -16,6 +16,7 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 app.get('/', (req, res) => res.send("OBD Server is running!"));
 
 app.get('/get-latest-data', async (req, res) => {
+  Console.log("Fetching latest telemetry data...");
   try {
     const latest = await Telemetry.findOne().sort({ timestamp: -1 });
     res.json(latest);
