@@ -13,7 +13,7 @@ const telemetrySchema = new mongoose.Schema({
   fault_description: String,
   geo_fence_status: String,
   timestamp: Date
-}, { collection: 'YourCollectionName' }); // change to your collection name
+}, { collection: 'esp32datas' }); // change to your collection name
 
 const Telemetry = mongoose.model('Telemetry', telemetrySchema);
 
