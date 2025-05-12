@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import Telemetry from './telemetry.model.js';
+import TelemetryGeoFencing from './telemetryGeoFencing.model.js';
 
 const app = express();
 app.use(cors());
@@ -19,6 +20,16 @@ app.get('/get-latest-data', async (req, res) => {
   console.log("Fetching latest telemetry data...");
   try {
     const latest = await Telemetry.findOne().sort({ timestamp: -1 });
+    res.json(latest);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch latest data' });
+  }
+});
+app.get('/get-latest-geo-fence-data', async (req, res) => {
+  console.log("Fetching latest telemetry data...");
+  try {
+    const latest = await TelemetryGeoFencing.findOne().sort({ timestamp: -1 });
     res.json(latest);
   } catch (err) {
     console.error(err);
